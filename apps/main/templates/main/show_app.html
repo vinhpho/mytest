@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Update Appointment</title>
+  </head>
+  <body>
+    <a href="/user_dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+    {% for item in app %}
+    <div class="">
+    <form class="" action="/edit_app/{{item.id}}" method="post">
+    {% csrf_token %}
+
+      Task: <input type="text" name="task" value="{{item.task}}">
+      Status: <select class="" name="status">
+          <option value="Done">Done</option>
+          <option value="Done">Pending</option>
+          <option value="Done">Missed</option>
+      </select>
+      Date: <input type="date" name="date" value="{{item.date}}">
+      Time: <input type="text" name="time" value="{{item.time}}">
+     {% endfor %}
+      <input type="submit" value="Update">
+    </form>
+    </div>
+  </body>
+</html>

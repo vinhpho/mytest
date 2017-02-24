@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <h2>Hello {{user.name}}!</h2>
+    <p>Here are  your appointment for today {{tasks.date}}</p>
+    <div>
+    <table>
+            <tr>
+               <th>Tasks</th>
+               <th>Time</th>
+               <th>Status</th>
+               <th>Action</th>
+            </tr>
+            {% for item in tasks %}
+              <tr>
+                  <td>{{item.task}}</td>
+                  <td>{{item.time}}</td>
+                  <td>{{item.status}}</td>
+                  {% if item.status == 'Pending' %}
+                      <td><a href="/destroy/{{item.id}}">Delete</a></td>
+                      <td><a href="/show_app/{{item.id}}">Edit</a></td>
+                 {% endif %}
+              </tr>
+            {% endfor %}
+          </table>
+      </div>
+    <p>Your Other appointment:</p>
+    <div class="">
+
+    <table>
+            <tr>
+               <th>Tasks</th>
+               <th>Date</th>
+               <th>Time</th>
+            </tr>
+            {% for item in other %}
+              <tr>
+                  <td>{{item.task}}</td>
+                  <td>{{item.date}}</td>
+                  <td>{{item.time}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+    </div>
+    <p>Add Appointment</p>
+    <form class="" action="/add_appointment" method="post">
+      {% csrf_token %}
+      Date:<input type="date" name="date" min={{today}}>
+      Time:<input type="" name="time" >
+      Task:<input type="text" name="task">
+      <input type="submit" value="Add">
+
+    </form>
+  </body>
+</html>
